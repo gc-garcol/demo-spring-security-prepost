@@ -1,10 +1,8 @@
 package gc.garcol.demospringsecurity.endpoints;
 
+import gc.garcol.demospringsecurity.dto.Hello;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author garcol
@@ -17,6 +15,12 @@ public class MyEndpoint {
     @PreAuthorize("@MySecurityService.hasTrueParams(#param)")
     public String hello(@PathVariable("param") String param) {
         return "checked: " + param;
+    }
+
+    @PostMapping("/test")
+    @PreAuthorize("@MySecurityService.hasTrueParams(#hello.username)")
+    public Hello postHello(@RequestBody Hello hello) {
+        return hello;
     }
 
 }
