@@ -1,6 +1,7 @@
 package gc.garcol.demospringsecurity.endpoints;
 
 import gc.garcol.demospringsecurity.aop.LogParam;
+import gc.garcol.demospringsecurity.aop.SpELAnnotation;
 import gc.garcol.demospringsecurity.dto.Hello;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,13 @@ public class MyEndpoint {
         return hello;
     }
 
-
+    @GetMapping("/test")
+    @SpELAnnotation(
+            spEL = "new gc.garcol.demospringsecurity.dto.Hello('thai', 'mei')",
+            type = Hello.class
+    )
+    public String testSpELAnnotation() {
+        return "testSpELAnnotation";
+    }
 
 }

@@ -21,7 +21,6 @@ public class LoggingAspect {
     @Before("myEndpointPoincut()")
     public void beforeMyEndpointJoinpoint(JoinPoint joinPoint) {
         log.info("{} | {} | {}", joinPoint, joinPoint.getArgs(), joinPoint.getSignature().getDeclaringTypeName());
-
     }
 
 }
