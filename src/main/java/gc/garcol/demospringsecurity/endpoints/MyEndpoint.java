@@ -2,6 +2,7 @@ package gc.garcol.demospringsecurity.endpoints;
 
 import gc.garcol.demospringsecurity.aop.LogParam;
 import gc.garcol.demospringsecurity.aop.SpELAnnotation;
+import gc.garcol.demospringsecurity.aop.SpELParamHandleAnnotation;
 import gc.garcol.demospringsecurity.dto.Hello;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,14 @@ public class MyEndpoint {
     )
     public String testSpELAnnotation() {
         return "testSpELAnnotation";
+    }
+
+    @PostMapping("/testSpELParamHandleAnnotation")
+    @SpELParamHandleAnnotation(
+            spEL = "#hello.username"
+    )
+    public Hello testSpELParamHandleAnnotation(@RequestBody Hello hello) {
+        return hello;
     }
 
 }
